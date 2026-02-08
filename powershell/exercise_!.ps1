@@ -1,7 +1,8 @@
 #1. Setup the Variables (The Boxes)
-$TargetFolder = "D:\prjects\powershell_projects\Playground"
-$BackupFolder = "D:\prjects\powershell_projects\Playground_Backup"
-
+Param(
+[string]$TargetFolder = "D:\prjects\powershell_projects\Playground",
+[string]$BackupFolder = "D:\prjects\powershell_projects\Playground_Backup"
+)
 #2. The Logic(The Janitor)
 Write-Host "Starting the cleanup..."
 
