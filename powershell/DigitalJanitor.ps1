@@ -20,9 +20,17 @@ if (Test-Path $TargetFolder) {
     Write-Host "found the folder. Proceeding with cleanup..."
 
     #3. The Logic(The Janitor)
-    Get-ChildItem -Path $TargetFolder |
-    Where-Object {$_.Extension -eq ".txt"} |
-    Move-Item -Destination $BackupFolder -Force
+    # Get-ChildItem -Path $TargetFolder |
+    # Where-Object {$_.Extension -eq ".txt"} |
+    # Move-Item -Destination $BackupFolder #v2 code
+$FileList = Get-ChildItem -Path $TargetFolder | Where-Object {$_.Extension -eq ".txt"}
+foreach ($File in $FileList) {
+    #1. Move the specified file we are holding($File)
+    Move-Item -Path $File.FullName -Destination $BackupFolder -Force
+
+    #2. Brag about it
+    Write-Host "Moved file: $($File.Name) to $BackupFolder" -ForegroundColor Cyan
+}
     Write-Host "Cleanup Complete!" -ForegroundColor Green
 } else {
     Write-Host "Error: The folder '$TargetFolder' does not exist!" -ForegroundColor Red
